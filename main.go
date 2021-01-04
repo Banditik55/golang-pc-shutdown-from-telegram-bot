@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"math"
 	"os"
@@ -53,7 +54,7 @@ func renderBot() {
 		panic(err)
 	}
 	bot = _bot
-	log.Println("Connected to telegram bot", bot.Self.UserName)
+	fmt.Println("Connected to telegram bot", bot.Self.UserName)
 	// bot.Debug = true
 
 	_adminID, err := strconv.Atoi(os.Getenv("ADMIN_ID"))
@@ -127,7 +128,7 @@ func shutdown() {
 		return
 	}
 	bot.Send(createMessage(adminID, "shutdown"))
-	if err := exec.Command("sudo", "shutdown", "-h", "now").Run(); err != nil {
+	if err := exec.Command("sudo", "shutdown", "-h", "+1").Run(); err != nil {
 		panic(err)
 	}
 }
